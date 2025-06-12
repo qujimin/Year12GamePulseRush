@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://x1641maqvpqt"
-path="res://.godot/imported/Jump (32x32).png-f8e395e6c1b186d69c4e3e8c93b15fca.ctex"
+uid="uid://c1k04jvbypb6q"
+path="res://.godot/imported/Wall Jump (32x32).png-79dc071a7f862245871b064443884d9b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://level_1/Virtual Guy/Jump (32x32).png"
-dest_files=["res://.godot/imported/Jump (32x32).png-f8e395e6c1b186d69c4e3e8c93b15fca.ctex"]
+source_file="res://Virtual Guy/Wall Jump (32x32).png"
+dest_files=["res://.godot/imported/Wall Jump (32x32).png-79dc071a7f862245871b064443884d9b.ctex"]
 
 [params]
 
