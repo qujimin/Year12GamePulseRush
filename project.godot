@@ -13,3 +13,7 @@ config_version=5
 config/name="game project - pulse rush"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[physics]
+
+2d/default_gravity=1000.0
