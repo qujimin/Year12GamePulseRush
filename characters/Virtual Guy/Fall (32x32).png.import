@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsdm7vj1f13ur"
-path="res://.godot/imported/Run (32x32).png-b3059091bc2e0f5d50c6a3fcf31038c1.ctex"
+uid="uid://crjsmf55simoc"
+path="res://.godot/imported/Fall (32x32).png-e58d09184078b7276cef2f6ab85bd2ad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Virtual Guy/Run (32x32).png"
-dest_files=["res://.godot/imported/Run (32x32).png-b3059091bc2e0f5d50c6a3fcf31038c1.ctex"]
+source_file="res://characters/Virtual Guy/Fall (32x32).png"
+dest_files=["res://.godot/imported/Fall (32x32).png-e58d09184078b7276cef2f6ab85bd2ad.ctex"]
 
 [params]
 
