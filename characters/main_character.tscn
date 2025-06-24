@@ -1,7 +1,9 @@
-[gd_scene load_steps=38 format=3 uid="uid://dki06hol8b7yh"]
+[gd_scene load_steps=46 format=3 uid="uid://dki06hol8b7yh"]
 
 [ext_resource type="Texture2D" uid="uid://ci3q6kb74whh" path="res://characters/Virtual Guy/Idle (32x32).png" id="1_1fdtq"]
+[ext_resource type="Script" uid="uid://b5d1lg46f586h" path="res://Ultimate 2D Platformer Controller v1.1.0/Ultimate 2D Platformer Controller v1.0.3/UltimatePlatformerController.gd" id="1_ujb5b"]
 [ext_resource type="Texture2D" uid="uid://x1641maqvpqt" path="res://characters/Virtual Guy/Jump (32x32).png" id="1_yh2br"]
+[ext_resource type="Texture2D" uid="uid://dvuumod4h1l85" path="res://characters/Virtual Guy/Double Jump (32x32).png" id="2_yv0jc"]
 [ext_resource type="Texture2D" uid="uid://crjsmf55simoc" path="res://characters/Virtual Guy/Fall (32x32).png" id="3_ujb5b"]
 [ext_resource type="Texture2D" uid="uid://dsdm7vj1f13ur" path="res://characters/Virtual Guy/Run (32x32).png" id="4_yv0jc"]
 [ext_resource type="Texture2D" uid="uid://c1k04jvbypb6q" path="res://characters/Virtual Guy/Wall Jump (32x32).png" id="5_4omim"]
@@ -57,6 +59,30 @@ region = Rect2(0, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_u1nf2"]
 atlas = ExtResource("3_ujb5b")
 region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4omim"]
+atlas = ExtResource("2_yv0jc")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bb5mw"]
+atlas = ExtResource("2_yv0jc")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vefmh"]
+atlas = ExtResource("2_yv0jc")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yc70t"]
+atlas = ExtResource("2_yv0jc")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lb2q4"]
+atlas = ExtResource("2_yv0jc")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0n43"]
+atlas = ExtResource("2_yv0jc")
+region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5lkva"]
 atlas = ExtResource("4_yv0jc")
@@ -179,6 +205,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_4omim")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bb5mw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vefmh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yc70t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lb2q4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t0n43")
+}],
+"loop": true,
+"name": &"roll",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_5lkva")
 }, {
 "duration": 1.0,
@@ -235,19 +284,32 @@ animations = [{
 "texture": SubResource("AtlasTexture_6yxer")
 }],
 "loop": true,
-"name": &"wall_slide",
+"name": &"slide",
 "speed": 20.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2q423"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yv0jc"]
+size = Vector2(21, 24)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "PlayerCollider")]
+script = ExtResource("1_ujb5b")
+PlayerSprite = NodePath("PlayerSprite")
+PlayerCollider = NodePath("PlayerCollider")
+wallJump = true
+wallSliding = 5.0
+dashType = 1
+run = true
+jump = true
+idle = true
+walk = true
+slide = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_uvl38")
-animation = &"wall_slide"
+animation = &"idle"
 autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_2q423")
+[node name="PlayerCollider" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 4)
+shape = SubResource("RectangleShape2D_yv0jc")
