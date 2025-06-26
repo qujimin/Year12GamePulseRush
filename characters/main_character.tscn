@@ -1,12 +1,33 @@
-[gd_scene load_steps=46 format=3 uid="uid://dki06hol8b7yh"]
+[gd_scene load_steps=52 format=3 uid="uid://dki06hol8b7yh"]
 
 [ext_resource type="Texture2D" uid="uid://ci3q6kb74whh" path="res://characters/Virtual Guy/Idle (32x32).png" id="1_1fdtq"]
 [ext_resource type="Script" uid="uid://b5d1lg46f586h" path="res://Ultimate 2D Platformer Controller v1.1.0/Ultimate 2D Platformer Controller v1.0.3/UltimatePlatformerController.gd" id="1_ujb5b"]
 [ext_resource type="Texture2D" uid="uid://x1641maqvpqt" path="res://characters/Virtual Guy/Jump (32x32).png" id="1_yh2br"]
+[ext_resource type="Texture2D" uid="uid://bndxwaa6t2ahv" path="res://characters/Virtual Guy/Hit (32x32).png" id="2_4omim"]
 [ext_resource type="Texture2D" uid="uid://dvuumod4h1l85" path="res://characters/Virtual Guy/Double Jump (32x32).png" id="2_yv0jc"]
 [ext_resource type="Texture2D" uid="uid://crjsmf55simoc" path="res://characters/Virtual Guy/Fall (32x32).png" id="3_ujb5b"]
 [ext_resource type="Texture2D" uid="uid://dsdm7vj1f13ur" path="res://characters/Virtual Guy/Run (32x32).png" id="4_yv0jc"]
 [ext_resource type="Texture2D" uid="uid://c1k04jvbypb6q" path="res://characters/Virtual Guy/Wall Jump (32x32).png" id="5_4omim"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxxcb"]
+atlas = ExtResource("2_4omim")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4eogp"]
+atlas = ExtResource("2_4omim")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_su5gy"]
+atlas = ExtResource("2_4omim")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ih8mu"]
+atlas = ExtResource("2_4omim")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmbhg"]
+atlas = ExtResource("2_4omim")
+region = Rect2(192, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q0fyf"]
 atlas = ExtResource("1_1fdtq")
@@ -156,6 +177,26 @@ region = Rect2(128, 0, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_rxxcb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4eogp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_su5gy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ih8mu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmbhg")
+}],
+"loop": true,
+"name": &"dash",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_q0fyf")
 }, {
 "duration": 1.0,
@@ -201,7 +242,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"jump",
-"speed": 5.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -288,28 +329,21 @@ animations = [{
 "speed": 20.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yv0jc"]
-size = Vector2(21, 24)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4omim"]
+size = Vector2(20, 25)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "PlayerCollider")]
 script = ExtResource("1_ujb5b")
 PlayerSprite = NodePath("PlayerSprite")
 PlayerCollider = NodePath("PlayerCollider")
-wallJump = true
-wallSliding = 5.0
-dashType = 1
-run = true
-jump = true
-idle = true
-walk = true
-slide = true
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_uvl38")
 animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.0944449
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 4)
-shape = SubResource("RectangleShape2D_yv0jc")
+position = Vector2(0, 3.5)
+shape = SubResource("RectangleShape2D_4omim")
