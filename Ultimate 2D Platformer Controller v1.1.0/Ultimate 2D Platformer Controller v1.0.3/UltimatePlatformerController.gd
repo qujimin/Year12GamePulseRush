@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 class_name PlatformerController2D
 
-@export var README: String = "IMPORTANT: ENSURE 'left', 'right', 'jump', 'dash', 'up', 'down', 'roll', 'latch', 'twirl', 'run' ARE ASSIGNED IN PROJECT SETTINGS INPUT MAP. Usage tips: 1. Hover over toggles/variables for details to avoid bugs. 2. Animations are primitive; modify code for custom art."
+@export var README: String = "IMPORTANT: ENSURE 'left', 'right', 'jump', 'dash', 'up', 'down', 'roll', 'latch', 'twirl', 'run' ARE ASSIGNED IN PROJECT SETTINGS INPUT MAP. Usage tips: 1. Hover over toggles/variables for details to avoid bugs. 2. Animations are primitive; adjust code for custom art."
 #INFO README
 #IMPORTANT: ENSURE 'left', 'right', 'jump', 'dash', 'up', 'down', 'roll', 'latch', 'twirl', 'run' ARE ASSIGNED IN PROJECT SETTINGS INPUT MAP. THIS IS REQUIRED
 #Usage tips:
@@ -31,7 +31,7 @@ class_name PlatformerController2D
 ## Peak height of player's jump
 @export_range(0, 20) var jumpHeight: float = 2.0
 ## Number of jumps before needing to touch ground. >1 disables jump buffering/coyote time.
-@export_range(0, 4) var jumps: int = 1
+@export_range(0, 4) var jumps: int = 2 # Changed to 2 for double jumping
 ## Strength of gravity pulling player down
 @export_range(0, 100) var gravityScale: float = 20.0
 ## Fastest fall speed
@@ -382,13 +382,13 @@ func _physics_process(delta):
 		if wasPressingR and !(upHold):
 			velocity.y = 0
 			velocity.x = maxSpeedLock * rollLength
-			dashCount += -1
+			dashCount -= 1
 			movementInputMonitoring = Vector2(false, false)
 			_inputPauseReset(rollLength * 0.0625)
 		elif !(upHold):
 			velocity.y = 0
 			velocity.x = -maxSpeedLock * rollLength
-			dashCount += -1
+			dashCount -= 1
 			movementInputMonitoring = Vector2(false, false)
 			_inputPauseReset(rollLength * 0.0625)
 		
@@ -468,7 +468,8 @@ func _physics_process(delta):
 			_wallJump()
 		elif jumpTap and jumpCount > 0:
 			velocity.y = -jumpMagnitude
-			jumpCount = jumpCount - 1
+			anim.play("jump") # Added to play jump animation for double jumps
+			jumpCount -= 1
 			_endGroundPound()
 			
 	# Dashing
@@ -582,6 +583,7 @@ func _coyoteTime():
 func _jump():
 	if jumpCount > 0:
 		velocity.y = -jumpMagnitude
+		anim.play("jump") # Ensure jump animation plays for single jumps
 		jumpCount -= 1
 		jumpWasPressed = false
 

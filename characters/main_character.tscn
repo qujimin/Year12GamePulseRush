@@ -242,7 +242,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"jump",
-"speed": 20.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -330,20 +330,20 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4omim"]
-size = Vector2(20, 25)
+size = Vector2(20, 24)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "PlayerCollider")]
 script = ExtResource("1_ujb5b")
 PlayerSprite = NodePath("PlayerSprite")
 PlayerCollider = NodePath("PlayerCollider")
+timeToReachMaxSpeed = 0.25
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_uvl38")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.0944449
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3.5)
+position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_4omim")
