@@ -20,7 +20,7 @@ class_name PlatformerController2D
 ## Time to reach max speed from rest (seconds)
 @export_range(0, 4) var timeToReachMaxSpeed: float = 0.2
 ## Time to reach zero speed from max speed (seconds)
-@export_range(0, 4) var timeToReachZeroSpeed: float = 0.2
+@export_range(0, 4) var timeToReachZeroSpeed: float = 0.03 # Reduced to 0.03 for less slidy running
 ## If true, player instantly moves and switches directions. Overrides "timeToReach" variables, setting them to 0.
 @export var directionalSnap: bool = false
 ## If enabled, default movement speed is half maxSpeed; hold "run" to reach max speed. Assign "run" in project input settings.
@@ -31,7 +31,7 @@ class_name PlatformerController2D
 ## Peak height of player's jump
 @export_range(0, 20) var jumpHeight: float = 2.0
 ## Number of jumps before needing to touch ground. >1 disables jump buffering/coyote time.
-@export_range(0, 4) var jumps: int = 2 # Changed to 2 for double jumping
+@export_range(0, 4) var jumps: int = 2
 ## Strength of gravity pulling player down
 @export_range(0, 100) var gravityScale: float = 20.0
 ## Fastest fall speed
@@ -41,7 +41,7 @@ class_name PlatformerController2D
 ## If true, releasing jump key cuts vertical velocity for variable jump height
 @export var shortHopAkaVariableJumpHeight: bool = true
 ## Factor by which jump height is cut
-@export_range(1, 10) var jumpVariable: float = 2
+@export_range(1, 10) var jumpVariable: float = 1.3 # Reduced to 1.5 for smoother variable jump height
 ## Extra time (seconds) to jump after falling off edge
 @export_range(0, 0.5) var coyoteTime: float = 0.2
 ## Time window (seconds) to press jump before landing and register jump
@@ -468,7 +468,7 @@ func _physics_process(delta):
 			_wallJump()
 		elif jumpTap and jumpCount > 0:
 			velocity.y = -jumpMagnitude
-			anim.play("jump") # Added to play jump animation for double jumps
+			anim.play("jump")
 			jumpCount -= 1
 			_endGroundPound()
 			
@@ -583,7 +583,7 @@ func _coyoteTime():
 func _jump():
 	if jumpCount > 0:
 		velocity.y = -jumpMagnitude
-		anim.play("jump") # Ensure jump animation plays for single jumps
+		anim.play("jump")
 		jumpCount -= 1
 		jumpWasPressed = false
 
