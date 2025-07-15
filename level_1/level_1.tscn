@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://svwq2klka5sn"]
+[gd_scene load_steps=7 format=3 uid="uid://svwq2klka5sn"]
 
 [ext_resource type="Texture2D" uid="uid://c4vo46ka6k25v" path="res://level_1/blue-preview.png" id="1_hbghi"]
 [ext_resource type="Texture2D" uid="uid://deabdqwoeyv84" path="res://level_1/Terrain (16x16).png" id="2_hn12h"]
@@ -299,6 +299,8 @@ texture = ExtResource("2_hn12h")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_ihfcg")
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_kw4bk"]
+
 [node name="Node" type="Node"]
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -319,3 +321,16 @@ layer_0/tile_data = PackedInt32Array(589827, 983040, 1, 786435, 983040, 1, 11796
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("3_hn12h")]
 position = Vector2(112, 80)
+maxSpeed = 200.0
+timeToReachMaxSpeed = 0.3
+jumpVariable = 2.0
+dashLength = 2.5
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
+sprite_frames = SubResource("SpriteFrames_kw4bk")

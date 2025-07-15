@@ -16,11 +16,11 @@ class_name PlatformerController2D
 #INFO HORIZONTAL MOVEMENT
 @export_category("L/R Movement")
 ## The maximum speed the player can move
-@export_range(50, 500) var maxSpeed: float = 200.0
+@export_range(50, 500) var maxSpeed: float = 250.0
 ## Time to reach max speed from rest (seconds)
-@export_range(0, 4) var timeToReachMaxSpeed: float = 0.2
+@export_range(0, 4) var timeToReachMaxSpeed: float = 0.3
 ## Time to reach zero speed from max speed (seconds)
-@export_range(0, 4) var timeToReachZeroSpeed: float = 0.03 # Reduced to 0.03 for less slidy running
+@export_range(0, 4) var timeToReachZeroSpeed: float = 0.15
 ## If true, player instantly moves and switches directions. Overrides "timeToReach" variables, setting them to 0.
 @export var directionalSnap: bool = false
 ## If enabled, default movement speed is half maxSpeed; hold "run" to reach max speed. Assign "run" in project input settings.
@@ -29,19 +29,19 @@ class_name PlatformerController2D
 #INFO JUMPING
 @export_category("Jumping and Gravity")
 ## Peak height of player's jump
-@export_range(0, 20) var jumpHeight: float = 2.0
+@export_range(0, 20) var jumpHeight: float = 2.5
 ## Number of jumps before needing to touch ground. >1 disables jump buffering/coyote time.
 @export_range(0, 4) var jumps: int = 2
 ## Strength of gravity pulling player down
-@export_range(0, 100) var gravityScale: float = 20.0
+@export_range(0, 100) var gravityScale: float = 25.0
 ## Fastest fall speed
 @export_range(0, 1000) var terminalVelocity: float = 500.0
 ## Faster falling for less floaty jumps
-@export_range(0.5, 3) var descendingGravityFactor: float = 1.3
+@export_range(0.5, 3) var descendingGravityFactor: float = 1.5
 ## If true, releasing jump key cuts vertical velocity for variable jump height
 @export var shortHopAkaVariableJumpHeight: bool = true
 ## Factor by which jump height is cut
-@export_range(1, 10) var jumpVariable: float = 1.3 # Reduced to 1.5 for smoother variable jump height
+@export_range(1, 10) var jumpVariable: float = 1.8
 ## Extra time (seconds) to jump after falling off edge
 @export_range(0, 0.5) var coyoteTime: float = 0.2
 ## Time window (seconds) to press jump before landing and register jump
@@ -70,7 +70,7 @@ class_name PlatformerController2D
 ## If true, opposite direction input during dash zeros velocity
 @export var dashCancel: bool = true
 ## Dash distance multiplier
-@export_range(1.5, 4) var dashLength: float = 2.0
+@export_range(1.5, 4) var dashLength: float = 1.5
 
 @export_category("Corner Cutting/Jump Correct")
 ## Nudges player if head is slightly blocked during jump. Requires RayCasts assigned.
@@ -135,6 +135,8 @@ var jumpCount: int
 var jumpWasPressed: bool = false
 var coyoteActive: bool = false
 var dashMagnitude: float
+var dashAcceleration: float
+var dashTime: float = 0.2
 var gravityActive: bool = true
 var dashing: bool = false
 var dashCount: int
@@ -149,7 +151,6 @@ var wasPressingR: bool
 var movementInputMonitoring: Vector2 = Vector2(true, true) # x: right, y: left
 
 var gdelta: float = 1
-
 var dset: bool = false
 
 var colliderScaleLockY: float
@@ -189,13 +190,14 @@ func _ready():
 	_updateData()
 
 func _updateData():
-	acceleration = maxSpeed / timeToReachMaxSpeed
-	deceleration = -maxSpeed / timeToReachZeroSpeed
+	acceleration = maxSpeed / max(timeToReachMaxSpeed, 0.01)
+	deceleration = -maxSpeed / max(timeToReachZeroSpeed, 0.01)
 	
 	jumpMagnitude = (10.0 * jumpHeight) * gravityScale
 	jumpCount = jumps
 	
 	dashMagnitude = maxSpeed * dashLength
+	dashAcceleration = dashMagnitude / dashTime
 	dashCount = dashes
 	
 	maxSpeedLock = maxSpeed
@@ -204,21 +206,15 @@ func _updateData():
 	colliderScaleLockY = col.scale.y
 	colliderPosLockY = col.position.y
 	
-	if timeToReachMaxSpeed == 0:
+	if timeToReachMaxSpeed <= 0:
 		instantAccel = true
-		timeToReachMaxSpeed = 1
-	elif timeToReachMaxSpeed < 0:
-		timeToReachMaxSpeed = abs(timeToReachMaxSpeed)
-		instantAccel = false
+		timeToReachMaxSpeed = 0.01
 	else:
 		instantAccel = false
 		
-	if timeToReachZeroSpeed == 0:
+	if timeToReachZeroSpeed <= 0:
 		instantStop = true
-		timeToReachZeroSpeed = 1
-	elif timeToReachZeroSpeed < 0:
-		timeToReachZeroSpeed = abs(timeToReachZeroSpeed)
-		instantStop = false
+		timeToReachZeroSpeed = 0.01
 	else:
 		instantStop = false
 		
@@ -310,52 +306,53 @@ func _physics_process(delta):
 	twirlTap = Input.is_action_just_pressed("twirl")
 	
 	# Left and Right Movement
-	if rightHold and leftHold and movementInputMonitoring:
-		if !instantStop:
-			_decelerate(delta, false)
-		else:
-			velocity.x = -0.1
-	elif rightHold and movementInputMonitoring.x:
-		if velocity.x > maxSpeed or instantAccel:
-			velocity.x = maxSpeed
-		else:
-			velocity.x += acceleration * delta
-		if velocity.x < 0:
+	if !dashing:
+		if rightHold and leftHold and movementInputMonitoring:
 			if !instantStop:
 				_decelerate(delta, false)
 			else:
 				velocity.x = -0.1
-	elif leftHold and movementInputMonitoring.y:
-		if velocity.x < -maxSpeed or instantAccel:
-			velocity.x = -maxSpeed
-		else:
-			velocity.x -= acceleration * delta
+		elif rightHold and movementInputMonitoring.x:
+			if velocity.x > maxSpeed or instantAccel:
+				velocity.x = maxSpeed
+			else:
+				velocity.x += acceleration * delta
+			if velocity.x < 0:
+				if !instantStop:
+					_decelerate(delta, false)
+				else:
+					velocity.x = -0.1
+		elif leftHold and movementInputMonitoring.y:
+			if velocity.x < -maxSpeed or instantAccel:
+				velocity.x = -maxSpeed
+			else:
+				velocity.x -= acceleration * delta
+			if velocity.x > 0:
+				if !instantStop:
+					_decelerate(delta, false)
+				else:
+					velocity.x = 0.1
+				
 		if velocity.x > 0:
+			wasMovingR = true
+		elif velocity.x < 0:
+			wasMovingR = false
+		
+		if rightTap:
+			wasPressingR = true
+		if leftTap:
+			wasPressingR = false
+	
+		if runningModifier and !runHold:
+			maxSpeed = maxSpeedLock / 2
+		elif is_on_floor():
+			maxSpeed = maxSpeedLock
+	
+		if !(leftHold or rightHold):
 			if !instantStop:
 				_decelerate(delta, false)
 			else:
-				velocity.x = 0.1
-				
-	if velocity.x > 0:
-		wasMovingR = true
-	elif velocity.x < 0:
-		wasMovingR = false
-		
-	if rightTap:
-		wasPressingR = true
-	if leftTap:
-		wasPressingR = false
-	
-	if runningModifier and !runHold:
-		maxSpeed = maxSpeedLock / 2
-	elif is_on_floor():
-		maxSpeed = maxSpeedLock
-	
-	if !(leftHold or rightHold):
-		if !instantStop:
-			_decelerate(delta, false)
-		else:
-			velocity.x = 0
+				velocity.x = 0
 			
 	# Crouching
 	if crouch:
@@ -475,80 +472,56 @@ func _physics_process(delta):
 	# Dashing
 	if is_on_floor():
 		dashCount = dashes
-	if twoWayDashHorizontal and dashTap and dashCount > 0 and !rolling:
-		var dTime = 0.0625 * dashLength
+	if twoWayDashHorizontal and dashTap and dashCount > 0 and !rolling and (is_on_floor() or dashCount == dashes):
+		var targetVelocityX: float
 		if rightHold:
-			velocity.y = 0
-			velocity.x = dashMagnitude
-			_pauseGravity(dTime)
-			_dashingTime(dTime)
-			dashCount -= 1
-			movementInputMonitoring = Vector2(false, false)
-			_inputPauseReset(dTime)
+			targetVelocityX = dashMagnitude
 		elif leftHold:
-			velocity.y = 0
-			velocity.x = -dashMagnitude
-			_pauseGravity(dTime)
-			_dashingTime(dTime)
-			dashCount -= 1
-			movementInputMonitoring = Vector2(false, false)
-			_inputPauseReset(dTime)
+			targetVelocityX = -dashMagnitude
 		elif wasMovingR:
-			velocity.y = 0
-			velocity.x = dashMagnitude
-			_pauseGravity(dTime)
-			_dashingTime(dTime)
-			dashCount -= 1
-			movementInputMonitoring = Vector2(false, false)
-			_inputPauseReset(dTime)
+			targetVelocityX = dashMagnitude
 		else:
-			velocity.y = 0
-			velocity.x = -dashMagnitude
-			_pauseGravity(dTime)
-			_dashingTime(dTime)
-			dashCount -= 1
-			movementInputMonitoring = Vector2(false, false)
-			_inputPauseReset(dTime)
+			targetVelocityX = -dashMagnitude
+		velocity.y = 0
+		_dashingTime(targetVelocityX)
+		dashCount -= 1
+		movementInputMonitoring = Vector2(false, false)
+		_inputPauseReset(dashTime)
 			
 	if dashing and velocity.x > 0 and leftTap and dashCancel:
 		velocity.x = 0
 	if dashing and velocity.x < 0 and rightTap and dashCancel:
 		velocity.x = 0
 	
-	if eightWayDash and dashTap and dashCount > 0 and !rolling:
+	if eightWayDash and dashTap and dashCount > 0 and !rolling and (is_on_floor() or dashCount == dashes):
 		var input_direction = Input.get_vector("left", "right", "up", "down")
-		var dTime = 0.0625 * dashLength
-		_dashingTime(dTime)
-		_pauseGravity(dTime)
-		velocity = dashMagnitude * input_direction
+		_dashingTime(dashMagnitude * input_direction.x)
+		velocity.y = dashMagnitude * input_direction.y
 		if (!rightHold and !leftHold and !downHold and !upHold) and wasMovingR:
 			velocity.x = dashMagnitude
 		elif (!rightHold and !leftHold and !downHold and !upHold) and !wasMovingR:
 			velocity.x = -dashMagnitude
 		dashCount -= 1
 		movementInputMonitoring = Vector2(false, false)
-		_inputPauseReset(dTime)
+		_inputPauseReset(dashTime)
 	
-	if twoWayDashVertical and dashTap and dashCount > 0 and !rolling:
-		var dTime = 0.0625 * dashLength
+	if twoWayDashVertical and dashTap and dashCount > 0 and !rolling and (is_on_floor() or dashCount == dashes):
 		if upHold and downHold:
 			_placeHolder()
 		elif upHold:
-			_dashingTime(dTime)
-			_pauseGravity(dTime)
+			_dashingTime(0)
 			velocity.x = 0
 			velocity.y = -dashMagnitude
 			dashCount -= 1
 			movementInputMonitoring = Vector2(false, false)
-			_inputPauseReset(dTime)
-		elif downHold and dashCount > 0:
-			_dashingTime(dTime)
-			_pauseGravity(dTime)
+			_inputPauseReset(dashTime)
+		elif downHold:
+			_dashingTime(0)
 			velocity.x = 0
 			velocity.y = dashMagnitude
 			dashCount -= 1
 			movementInputMonitoring = Vector2(false, false)
-			_inputPauseReset(dTime)
+			_inputPauseReset(dashTime)
 	
 	# Corner Cutting
 	if cornerCutting:
@@ -626,13 +599,18 @@ func _pauseGravity(time):
 	await get_tree().create_timer(time).timeout
 	gravityActive = true
 
-func _dashingTime(time):
+func _dashingTime(targetVelocityX: float):
 	dashing = true
-	await get_tree().create_timer(time).timeout
+	var elapsed = 0.0
+	while elapsed < dashTime:
+		elapsed += get_process_delta_time()
+		var t = elapsed / dashTime
+		velocity.x = lerp(velocity.x, targetVelocityX, t)
+		await get_tree().process_frame
 	dashing = false
 	if !is_on_floor():
 		velocity.y = 0
-	velocity.x *= 0.1 # Sharply reduce horizontal velocity to stop sliding
+	velocity.x *= 0.1
 
 func _rollingTime(time):
 	rolling = true

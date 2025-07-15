@@ -337,6 +337,8 @@ script = ExtResource("1_ujb5b")
 PlayerSprite = NodePath("PlayerSprite")
 PlayerCollider = NodePath("PlayerCollider")
 timeToReachMaxSpeed = 0.25
+jumpHeight = 2.0
+gravityScale = 20.0
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
