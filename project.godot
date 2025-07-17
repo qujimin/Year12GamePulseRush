@@ -11,7 +11,11 @@ config_version=5
 [application]
 
 config/name="game project - pulse rush"
+run/main_scene="uid://o2w3l44ix83y"
 config/features=PackedStringArray("4.4", "Forward Plus")
+boot_splash/show_image=false
+boot_splash/fullsize=false
+boot_splash/use_filter=false
 config/icon="res://icon.svg"
 
 [display]
@@ -79,4 +83,4 @@ run={
 
 [rendering]
 
-environment/defaults/default_clear_color=Color(0, 0, 0, 1)
+environment/defaults/default_clear_color=Color(0.301961, 0.301961, 0.301961, 1)
