@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://svwq2klka5sn"]
+[gd_scene load_steps=16 format=3 uid="uid://svwq2klka5sn"]
 
 [ext_resource type="Texture2D" uid="uid://c4vo46ka6k25v" path="res://level_1/blue-preview.png" id="1_hbghi"]
 [ext_resource type="Texture2D" uid="uid://deabdqwoeyv84" path="res://level_1/Terrain (16x16).png" id="2_hn12h"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://djwblistbsi8e" path="res://level_1/game_manager.gd" id="5_3ockh"]
 [ext_resource type="PackedScene" uid="uid://bwmmjl6dp7auo" path="res://level_1/finish.tscn" id="6_u1mx0"]
 [ext_resource type="FontFile" uid="uid://dq5tf0bkavhnn" path="res://menu_scene/fonts/GrapeSoda.ttf" id="7_kwhby"]
+[ext_resource type="Script" uid="uid://v5m74ltmqb43" path="res://level_1/pause.gd" id="8_6qdp0"]
 [ext_resource type="Texture2D" uid="uid://dqsudwj7fenyj" path="res://backgrounds/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 3/1.png" id="8_rqqjs"]
 [ext_resource type="Texture2D" uid="uid://dee4k8xg5bqm5" path="res://backgrounds/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 3/2.png" id="9_6qdp0"]
 [ext_resource type="Texture2D" uid="uid://beml5akwebor8" path="res://backgrounds/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 3/3.png" id="10_kc2v0"]
@@ -306,6 +307,30 @@ texture = ExtResource("2_hn12h")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_ihfcg")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kc2v0"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+corner_detail = 20
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r8kyd"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 20
+shadow_offset = Vector2(5, 3.4)
+
 [node name="Node" type="Node"]
 
 [node name="GameManager" type="Node" parent="."]
@@ -377,15 +402,15 @@ position = Vector2(51, 437)
 [node name="Finish" parent="SceneObjects" instance=ExtResource("6_u1mx0")]
 position = Vector2(1164, 421)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Panel" type="Panel" parent="CanvasLayer"]
+[node name="Panel" type="Panel" parent="UI"]
 offset_left = 7.0
 offset_top = 6.0
 offset_right = 105.0
 offset_bottom = 46.0
 
-[node name="PointsLabel" type="Label" parent="CanvasLayer/Panel"]
+[node name="PointsLabel" type="Label" parent="UI/Panel"]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 1
@@ -400,6 +425,71 @@ theme_override_font_sizes/font_size = 30
 text = "Points = 0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Pause" type="Node" parent="UI"]
+script = ExtResource("8_6qdp0")
+
+[node name="PausePanel" type="Panel" parent="UI/Pause"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/Pause/PausePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = -179.0
+offset_right = 144.0
+offset_bottom = -128.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("7_kwhby")
+theme_override_font_sizes/font_size = 50
+text = "GAME PAUSED"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Pause/PausePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -206.0
+offset_top = -91.5
+offset_right = 206.0
+offset_bottom = 91.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 7
+
+[node name="Button" type="Button" parent="UI/Pause/PausePanel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 0.956863, 0.309804, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_kwhby")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_kc2v0")
+theme_override_styles/normal = SubResource("StyleBoxFlat_r8kyd")
+text = "Resume"
+
+[node name="Button2" type="Button" parent="UI/Pause/PausePanel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 0.956863, 0.309804, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_kwhby")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_kc2v0")
+theme_override_styles/normal = SubResource("StyleBoxFlat_r8kyd")
+text = "Go to main menu"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

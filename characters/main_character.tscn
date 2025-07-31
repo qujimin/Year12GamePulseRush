@@ -343,7 +343,7 @@ gravityScale = 20.0
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_uvl38")
-animation = &"idle"
+animation = &"jump"
 autoplay = "idle"
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="."]
