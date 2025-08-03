@@ -430,6 +430,8 @@ vertical_alignment = 1
 script = ExtResource("8_6qdp0")
 
 [node name="PausePanel" type="Panel" parent="UI/Pause"]
+unique_name_in_owner = true
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -472,6 +474,7 @@ grow_vertical = 2
 theme_override_constants/separation = 7
 
 [node name="Button" type="Button" parent="UI/Pause/PausePanel/VBoxContainer"]
+process_mode = 3
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(1, 0.956863, 0.309804, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -482,6 +485,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_r8kyd")
 text = "Resume"
 
 [node name="Button2" type="Button" parent="UI/Pause/PausePanel/VBoxContainer"]
+process_mode = 3
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(1, 0.956863, 0.309804, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -519,3 +523,6 @@ offset_right = 1900.0
 offset_bottom = 478.0
 texture = ExtResource("10_kc2v0")
 stretch_mode = 1
+
+[connection signal="pressed" from="UI/Pause/PausePanel/VBoxContainer/Button" to="UI/Pause" method="_on_button_pressed"]
+[connection signal="pressed" from="UI/Pause/PausePanel/VBoxContainer/Button2" to="UI/Pause" method="_on_button_2_pressed"]
