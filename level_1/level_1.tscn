@@ -310,17 +310,17 @@ texture = ExtResource("2_hn12h")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_ihfcg")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kc2v0"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grs0h"]
 bg_color = Color(0, 0, 0, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 border_color = Color(1, 1, 1, 1)
 corner_detail = 20
 shadow_size = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r8kyd"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qi5g4"]
 bg_color = Color(0, 0, 0, 1)
 border_width_left = 1
 border_width_top = 1
@@ -332,7 +332,8 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 corner_detail = 20
-shadow_offset = Vector2(5, 3.4)
+shadow_size = 5
+shadow_offset = Vector2(0, 3.4)
 
 [node name="Node" type="Node"]
 
@@ -491,27 +492,49 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 7
 
-[node name="Button" type="Button" parent="UI/Pause/PausePanel/VBoxContainer"]
+[node name="Resume" type="Button" parent="UI/Pause/PausePanel/VBoxContainer"]
 process_mode = 3
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(1, 0.956863, 0.309804, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("7_kwhby")
 theme_override_font_sizes/font_size = 30
-theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_kc2v0")
-theme_override_styles/normal = SubResource("StyleBoxFlat_r8kyd")
+theme_override_styles/hover = SubResource("StyleBoxFlat_grs0h")
+theme_override_styles/normal = SubResource("StyleBoxFlat_qi5g4")
 text = "Resume"
 
-[node name="Button2" type="Button" parent="UI/Pause/PausePanel/VBoxContainer"]
+[node name="Restart" type="Button" parent="UI/Pause/PausePanel/VBoxContainer"]
 process_mode = 3
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(1, 0.956863, 0.309804, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("7_kwhby")
 theme_override_font_sizes/font_size = 30
-theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_kc2v0")
-theme_override_styles/normal = SubResource("StyleBoxFlat_r8kyd")
-text = "Go to main menu"
+theme_override_styles/hover = SubResource("StyleBoxFlat_grs0h")
+theme_override_styles/normal = SubResource("StyleBoxFlat_qi5g4")
+text = "Restart"
+
+[node name="Settings" type="Button" parent="UI/Pause/PausePanel/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 0.956863, 0.309804, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_kwhby")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/hover = SubResource("StyleBoxFlat_grs0h")
+theme_override_styles/normal = SubResource("StyleBoxFlat_qi5g4")
+text = "Settings"
+
+[node name="Main Menu" type="Button" parent="UI/Pause/PausePanel/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 0.956863, 0.309804, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_kwhby")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/hover = SubResource("StyleBoxFlat_grs0h")
+theme_override_styles/normal = SubResource("StyleBoxFlat_qi5g4")
+text = "Main Menu"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -553,5 +576,7 @@ position = Vector2(446, 441)
 [node name="Enemy2" parent="." instance=ExtResource("9_grs0h")]
 position = Vector2(304, 205)
 
-[connection signal="pressed" from="UI/Pause/PausePanel/VBoxContainer/Button" to="UI/Pause" method="_on_button_pressed"]
-[connection signal="pressed" from="UI/Pause/PausePanel/VBoxContainer/Button2" to="UI/Pause" method="_on_button_2_pressed"]
+[connection signal="pressed" from="UI/Pause/PausePanel/VBoxContainer/Resume" to="UI/Pause" method="_on_resume_pressed"]
+[connection signal="pressed" from="UI/Pause/PausePanel/VBoxContainer/Restart" to="UI/Pause" method="_on_restart_pressed"]
+[connection signal="pressed" from="UI/Pause/PausePanel/VBoxContainer/Settings" to="UI/Pause" method="_on_settings_pressed"]
+[connection signal="pressed" from="UI/Pause/PausePanel/VBoxContainer/Main Menu" to="UI/Pause" method="_on_main_menu_pressed"]
