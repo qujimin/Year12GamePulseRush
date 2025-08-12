@@ -10,8 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://c1k04jvbypb6q" path="res://characters/Virtual Guy/Wall Jump (32x32).png" id="5_4omim"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4omim"]
-radius = 8.0
-height = 26.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rxxcb"]
 atlas = ExtResource("2_4omim")

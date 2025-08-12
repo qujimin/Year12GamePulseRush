@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpb3sh7bown3m"]
+
+[ext_resource type="Texture2D" uid="uid://1medybnsleto" path="res://Treasure Hunters/Treasure Hunters/Palm Tree Island/Sprites/Objects/Spikes/Spikes.png" id="1_s5gmn"]
+[ext_resource type="Script" uid="uid://bxx1adeaiu0o4" path="res://level_1/spikes.gd" id="1_uu1vu"]
+
+[node name="Spikes" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_uu1vu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_s5gmn")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-16, 16, -16, 10, -13, 5, -5, 0, 3, 3, 12, 1, 15, 6, 15, 16)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

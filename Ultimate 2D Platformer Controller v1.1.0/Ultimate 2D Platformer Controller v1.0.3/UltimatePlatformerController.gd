@@ -188,6 +188,8 @@ func _ready():
 	anim = PlayerSprite
 	col = PlayerCollider
 	_updateData()
+	PlayerManager.player = self
+	print("Player registered: ", PlayerManager.player)
 
 func _updateData():
 	acceleration = maxSpeed / max(timeToReachMaxSpeed, 0.01)
@@ -286,6 +288,9 @@ func _physics_process(delta):
 	if !dset:
 		gdelta = delta
 		dset = true
+	
+	if position.y >= 672:
+		die()
 	
 	# Input Detection
 	leftHold = Input.is_action_pressed("left")
@@ -625,6 +630,18 @@ func _endGroundPound():
 	groundPounding = false
 	appliedTerminalVelocity = terminalVelocity
 	gravityActive = true
+
+func die():
+	print("Player died at position: ", position)
+	PlayerManager.respawn_player()
+
+func take_damage():
+	print("Player took damage!")
+	die()
+
+func bounce():
+	velocity.y = -300  # Match the bounce strength from the enemy script
+	print("Player bounced!")
 
 func _placeHolder():
 	print("")
