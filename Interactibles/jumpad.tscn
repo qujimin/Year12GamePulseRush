@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://bu6l8t6oka0h4"]
 
-[ext_resource type="Script" uid="uid://t336op7yfu4y" path="res://jumpad.gd" id="1_5rpmb"]
+[ext_resource type="Script" uid="uid://t336op7yfu4y" path="res://level_1/jumpad.gd" id="1_5rpmb"]
 [ext_resource type="Texture2D" uid="uid://s4f0ot6qrwy3" path="res://Interactibles/Traps/Trampoline/Idle.png" id="1_hguma"]
 [ext_resource type="Texture2D" uid="uid://b7gs1yubv58lk" path="res://Interactibles/Traps/Trampoline/Jump (28x28).png" id="2_5rpmb"]
 
@@ -78,6 +78,14 @@ animations = [{
 "loop": true,
 "name": &"jump",
 "speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ynmuj")
+}],
+"loop": true,
+"name": &"used",
+"speed": 20.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_531rh"]
@@ -92,8 +100,7 @@ script = ExtResource("1_5rpmb")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_uyett")
-animation = &"jump"
-autoplay = "idle"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 10.5)

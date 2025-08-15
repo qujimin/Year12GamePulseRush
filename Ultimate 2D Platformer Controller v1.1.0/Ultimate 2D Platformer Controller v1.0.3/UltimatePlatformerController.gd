@@ -183,7 +183,12 @@ var rollTap: bool
 var downTap: bool
 var twirlTap: bool
 
+var max_health = 3
+var health = 0
+var can_take_damage = true
+
 func _ready():
+	health = max_health
 	wasMovingR = true
 	anim = PlayerSprite
 	col = PlayerCollider
@@ -631,13 +636,29 @@ func _endGroundPound():
 	appliedTerminalVelocity = terminalVelocity
 	gravityActive = true
 
+func take_damage(damage_amount : int):
+	if can_take_damage:
+		iframes()
+		
+		health -= damage_amount
+		PlayerManager.update_health_display()  # Add this line
+		
+		if health <= 0:
+			die()
+
 func die():
 	print("Player died at position: ", position)
 	PlayerManager.respawn_player()
 
-func take_damage():
-	print("Player took damage!")
-	die()
+# Add this function to call when health increases
+func heal(amount: int):
+	health = min(health + amount, max_health)
+	PlayerManager.update_health_display()
+
+func iframes():
+	can_take_damage = false
+	await get_tree().create_timer(1).timeout
+	can_take_damage = true
 
 func bounce():
 	velocity.y = -300  # Match the bounce strength from the enemy script

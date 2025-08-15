@@ -48,7 +48,6 @@ func _ready():
 	# Ensure Area2D is monitoring
 	area_2d.monitoring = true
 	area_2d.monitorable = true
-	area_2d.area_entered.connect(_on_area_2d_area_entered)
 	
 	# Debug print to confirm Area2D setup
 	print("Enemy Area2D monitoring: ", area_2d.monitoring, ", monitorable: ", area_2d.monitorable)
@@ -142,10 +141,8 @@ func _on_idle_timer_timeout():
 
 func die():
 	print("Enemy dying!")
-	is_dead = true
 	current_state = State.DEAD
 	velocity.x = 0
-	
 	# Play death animation
 	if animated_sprite.sprite_frames and animated_sprite.sprite_frames.has_animation("death"):
 		print("Playing death animation")
@@ -154,20 +151,19 @@ func die():
 		print("No death animation found, playing idle with red tint")
 		animated_sprite.play("idle")
 		animated_sprite.modulate = Color.RED
-	
-	# Disable collisions
-	collision_shape.disabled = true
-	area_2d.monitoring = false
-	
 	# Add death effects like bouncing
 	velocity.y = -200
-	
 	# Remove enemy after a delay
 	await get_tree().create_timer(2.0).timeout
 	queue_free()
-
+	
 func take_damage():
 	if not is_dead:
+		# Disable collisions immediately when taking damage
+		is_dead = true
+		collision_shape.disabled = true
+		area_2d.monitoring = false
+		area_2d.monitorable = false
 		die()
 
 func _on_area_2d_area_entered(area: Area2D):
@@ -189,7 +185,7 @@ func _on_area_2d_area_entered(area: Area2D):
 		else:
 			print("Player hit enemy from side!")
 			if player.has_method("take_damage"):
-				player.take_damage()
+				player.take_damage(1)
 			else:
 				print("Player doesn't have take_damage method")
 
