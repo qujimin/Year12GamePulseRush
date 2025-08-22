@@ -183,7 +183,11 @@ var rollTap: bool
 var downTap: bool
 var twirlTap: bool
 
-var max_health = 3
+var base_max_health = 3
+var temporary_health_bonus = 0
+var max_health: int:
+	get:
+		return base_max_health + temporary_health_bonus
 var health = 0
 var can_take_damage = true
 
@@ -641,16 +645,24 @@ func take_damage(damage_amount : int):
 		iframes()
 		
 		health -= damage_amount
-		PlayerManager.update_health_display()  # Add this line
+		PlayerManager.update_health_display()
 		
 		if health <= 0:
 			die()
 
 func die():
 	print("Player died at position: ", position)
+	# Reset temporary bonuses on death
+	temporary_health_bonus = 0
 	PlayerManager.respawn_player()
 
-# Add this function to call when health increases
+# Add temporary health (resets on death)
+func add_temporary_health(amount: int):
+	temporary_health_bonus += amount
+	health += amount
+	PlayerManager.update_health_display()
+
+# Regular healing (doesn't increase max_health)
 func heal(amount: int):
 	health = min(health + amount, max_health)
 	PlayerManager.update_health_display()

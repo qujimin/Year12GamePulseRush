@@ -9,7 +9,9 @@ var current_checkpoint: Checkpoint
 var player: Player
 
 func respawn_player():
-	player.health = player.max_health 
+	# Health is reset to base amount (temporary bonus was already cleared in die())
+	player.health = player.max_health  # This will be base_max_health since temporary_health_bonus = 0
+	
 	if player == null:
 		print("Error: Player is null in PlayerManager!")
 		return
