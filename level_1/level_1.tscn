@@ -360,13 +360,7 @@ expand_mode = 1
 [node name="FallingSpikes group" type="Node" parent="SceneObjects"]
 
 [node name="FallingSpikes" parent="SceneObjects/FallingSpikes group" instance=ExtResource("8_qi5g4")]
-position = Vector2(711, 392)
-
-[node name="FallingSpikes2" parent="SceneObjects/FallingSpikes group" instance=ExtResource("8_qi5g4")]
-position = Vector2(838, 383)
-
-[node name="FallingSpikes3" parent="SceneObjects/FallingSpikes group" instance=ExtResource("8_qi5g4")]
-position = Vector2(-27, 171)
+position = Vector2(17, 134)
 
 [node name="TileMap" type="TileMap" parent="SceneObjects"]
 texture_filter = 1
