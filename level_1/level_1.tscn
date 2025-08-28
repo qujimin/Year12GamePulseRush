@@ -1,10 +1,11 @@
-[gd_scene load_steps=25 format=3 uid="uid://svwq2klka5sn"]
+[gd_scene load_steps=26 format=3 uid="uid://svwq2klka5sn"]
 
 [ext_resource type="Texture2D" uid="uid://c4vo46ka6k25v" path="res://level_1/blue-preview.png" id="1_hbghi"]
 [ext_resource type="Texture2D" uid="uid://deabdqwoeyv84" path="res://level_1/Terrain (16x16).png" id="2_hn12h"]
 [ext_resource type="PackedScene" uid="uid://dki06hol8b7yh" path="res://characters/main_character.tscn" id="3_hn12h"]
 [ext_resource type="PackedScene" uid="uid://8ig4gqu8ad78" path="res://Interactibles/collectable.tscn" id="4_10lpg"]
 [ext_resource type="Script" uid="uid://djwblistbsi8e" path="res://level_1/game_manager.gd" id="5_3ockh"]
+[ext_resource type="PackedScene" uid="uid://chnkg84ucstqj" path="res://Interactibles/platform.tscn" id="6_bncxc"]
 [ext_resource type="PackedScene" uid="uid://bwmmjl6dp7auo" path="res://Interactibles/finish.tscn" id="6_u1mx0"]
 [ext_resource type="PackedScene" uid="uid://7msqwy8m3a74" path="res://Interactibles/checkpoint.tscn" id="7_kc2v0"]
 [ext_resource type="FontFile" uid="uid://dq5tf0bkavhnn" path="res://menu_scene/fonts/GrapeSoda.ttf" id="7_kwhby"]
@@ -388,6 +389,11 @@ drag_top_margin = 0.0
 drag_right_margin = 0.0
 drag_bottom_margin = 0.0
 
+[node name="Platform" parent="SceneObjects" instance=ExtResource("6_bncxc")]
+radius = Vector2(256, 256)
+rotation_speed = null
+clockwise = null
+
 [node name="Collectables group" type="Node" parent="SceneObjects"]
 
 [node name="Collectable" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
@@ -544,6 +550,12 @@ position = Vector2(534, 255)
 
 [node name="HealthUp4" parent="SceneObjects/Health group" instance=ExtResource("11_fmc86")]
 position = Vector2(526, 235)
+
+[node name="Platform2" parent="SceneObjects" instance=ExtResource("6_bncxc")]
+position = Vector2(205, 245)
+radius = Vector2(256, 256)
+rotation_speed = null
+clockwise = null
 
 [node name="Finish" parent="." instance=ExtResource("6_u1mx0")]
 position = Vector2(806, 592)

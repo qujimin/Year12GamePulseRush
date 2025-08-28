@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://chnkg84ucstqj"]
+
+[ext_resource type="Script" uid="uid://qqhatkhd1fkx" path="res://level_1/platform.gd" id="1_s8bxr"]
+[ext_resource type="Texture2D" uid="uid://cwy4knxea6w16" path="res://Interactibles/Traps/Platforms/Brown Off.png" id="2_c1gtx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ry5bi"]
+size = Vector2(32, 6)
+
+[node name="Platform" type="CharacterBody2D" groups=["platforms"]]
+script = ExtResource("1_s8bxr")
+radius = Vector2(256, 256)
+rotation_speed = null
+clockwise = null
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_c1gtx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_ry5bi")
