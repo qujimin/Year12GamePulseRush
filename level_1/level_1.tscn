@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://svwq2klka5sn"]
+[gd_scene load_steps=25 format=3 uid="uid://svwq2klka5sn"]
 
 [ext_resource type="Texture2D" uid="uid://c4vo46ka6k25v" path="res://level_1/blue-preview.png" id="1_hbghi"]
 [ext_resource type="Texture2D" uid="uid://deabdqwoeyv84" path="res://level_1/Terrain (16x16).png" id="2_hn12h"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://ch3w67onhoerw" path="res://Interactibles/falling_spikes.tscn" id="8_qi5g4"]
 [ext_resource type="Texture2D" uid="uid://dqsudwj7fenyj" path="res://backgrounds/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 3/1.png" id="8_rqqjs"]
 [ext_resource type="Texture2D" uid="uid://dee4k8xg5bqm5" path="res://backgrounds/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 3/2.png" id="9_6qdp0"]
+[ext_resource type="PackedScene" uid="uid://bu6l8t6oka0h4" path="res://Interactibles/jumpad.tscn" id="9_28rm5"]
 [ext_resource type="PackedScene" uid="uid://cxmbxht2ijxq5" path="res://Interactibles/enemy.tscn" id="9_grs0h"]
 [ext_resource type="Texture2D" uid="uid://beml5akwebor8" path="res://backgrounds/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 3/3.png" id="10_kc2v0"]
 [ext_resource type="PackedScene" uid="uid://dxgcekits1osb" path="res://Interactibles/health_up.tscn" id="11_fmc86"]
@@ -523,6 +524,12 @@ position = Vector2(122, 104)
 position = Vector2(567, 274)
 
 [node name="Jumpad group" type="Node" parent="SceneObjects"]
+
+[node name="Area2D" parent="SceneObjects/Jumpad group" instance=ExtResource("9_28rm5")]
+position = Vector2(160, 442)
+
+[node name="Area2D2" parent="SceneObjects/Jumpad group" instance=ExtResource("9_28rm5")]
+position = Vector2(200, 442)
 
 [node name="Health group" type="Node" parent="SceneObjects"]
 
