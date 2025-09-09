@@ -389,10 +389,12 @@ drag_top_margin = 0.0
 drag_right_margin = 0.0
 drag_bottom_margin = 0.0
 
-[node name="Platform" parent="SceneObjects" instance=ExtResource("6_bncxc")]
-radius = Vector2(256, 256)
-rotation_speed = null
-clockwise = null
+[node name="Platform group" type="Node" parent="SceneObjects"]
+
+[node name="Platform" parent="SceneObjects/Platform group" instance=ExtResource("6_bncxc")]
+
+[node name="Platform2" parent="SceneObjects/Platform group" instance=ExtResource("6_bncxc")]
+position = Vector2(258, 274)
 
 [node name="Collectables group" type="Node" parent="SceneObjects"]
 
@@ -550,12 +552,6 @@ position = Vector2(534, 255)
 
 [node name="HealthUp4" parent="SceneObjects/Health group" instance=ExtResource("11_fmc86")]
 position = Vector2(526, 235)
-
-[node name="Platform2" parent="SceneObjects" instance=ExtResource("6_bncxc")]
-position = Vector2(205, 245)
-radius = Vector2(256, 256)
-rotation_speed = null
-clockwise = null
 
 [node name="Finish" parent="." instance=ExtResource("6_u1mx0")]
 position = Vector2(806, 592)

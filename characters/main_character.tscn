@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://dki06hol8b7yh"]
+[gd_scene load_steps=60 format=3 uid="uid://dki06hol8b7yh"]
 
 [ext_resource type="Texture2D" uid="uid://ci3q6kb74whh" path="res://characters/Virtual Guy/Idle (32x32).png" id="1_1fdtq"]
 [ext_resource type="Script" uid="uid://b5d1lg46f586h" path="res://Ultimate 2D Platformer Controller v1.1.0/Ultimate 2D Platformer Controller v1.0.3/UltimatePlatformerController.gd" id="1_ujb5b"]
@@ -28,6 +28,34 @@ atlas = ExtResource("2_4omim")
 region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lmbhg"]
+atlas = ExtResource("2_4omim")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_piufh"]
+atlas = ExtResource("2_4omim")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbf3n"]
+atlas = ExtResource("2_4omim")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_syo40"]
+atlas = ExtResource("2_4omim")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lcvnp"]
+atlas = ExtResource("2_4omim")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mfw4o"]
+atlas = ExtResource("2_4omim")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dp06r"]
+atlas = ExtResource("2_4omim")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1qba"]
 atlas = ExtResource("2_4omim")
 region = Rect2(192, 0, 32, 32)
 
@@ -195,6 +223,32 @@ animations = [{
 }],
 "loop": true,
 "name": &"dash",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_piufh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kbf3n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_syo40")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lcvnp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mfw4o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dp06r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r1qba")
+}],
+"loop": true,
+"name": &"hit",
 "speed": 20.0
 }, {
 "frames": [{

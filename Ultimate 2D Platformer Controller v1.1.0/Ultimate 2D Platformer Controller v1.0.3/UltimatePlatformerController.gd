@@ -642,11 +642,11 @@ func _endGroundPound():
 
 func take_damage(damage_amount : int):
 	if can_take_damage:
+#		sprite.speed_scale = 1
+#		sprite.play("hit")
 		iframes()
-		
 		health -= damage_amount
 		PlayerManager.update_health_display()
-		
 		if health <= 0:
 			die()
 
