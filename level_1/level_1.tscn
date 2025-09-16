@@ -361,7 +361,10 @@ expand_mode = 1
 [node name="FallingSpikes group" type="Node" parent="SceneObjects"]
 
 [node name="FallingSpikes" parent="SceneObjects/FallingSpikes group" instance=ExtResource("8_qi5g4")]
-position = Vector2(428, 120)
+position = Vector2(735, 336)
+
+[node name="FallingSpikes2" parent="SceneObjects/FallingSpikes group" instance=ExtResource("8_qi5g4")]
+position = Vector2(839, 336)
 
 [node name="TileMap" type="TileMap" parent="SceneObjects"]
 texture_filter = 1
@@ -391,8 +394,6 @@ drag_bottom_margin = 0.0
 
 [node name="Platform group" type="Node" parent="SceneObjects"]
 
-[node name="Platform" parent="SceneObjects/Platform group" instance=ExtResource("6_bncxc")]
-
 [node name="Platform2" parent="SceneObjects/Platform group" instance=ExtResource("6_bncxc")]
 position = Vector2(258, 274)
 
@@ -402,99 +403,96 @@ position = Vector2(258, 274)
 position = Vector2(56, 226)
 
 [node name="Collectable2" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
-position = Vector2(307, 209)
+position = Vector2(79, 186)
 
 [node name="Collectable3" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
 position = Vector2(79, 226)
 
 [node name="Collectable4" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
-position = Vector2(250, 349)
+position = Vector2(246, 349)
 
 [node name="Collectable5" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
-position = Vector2(331, 446)
+position = Vector2(48, 428)
 
 [node name="Collectable6" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
-position = Vector2(298, 349)
+position = Vector2(288, 349)
 
 [node name="Collectable7" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
-position = Vector2(275, 348)
+position = Vector2(267, 349)
 
 [node name="Collectable8" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
-position = Vector2(57, 447)
+position = Vector2(58, 446)
 
 [node name="Collectable9" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
-position = Vector2(102, 223)
+position = Vector2(102, 226)
 
 [node name="Collectable10" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
-position = Vector2(71, 204)
+position = Vector2(67, 204)
 
 [node name="Collectable11" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
 position = Vector2(91, 204)
 
 [node name="Collectable12" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
-position = Vector2(178, 447)
+position = Vector2(38, 446)
 
 [node name="Collectable13" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
-position = Vector2(923, 183)
+position = Vector2(925, 181)
 
 [node name="Collectable14" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
-position = Vector2(947, 181)
+position = Vector2(946, 181)
 
 [node name="Collectable15" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
-position = Vector2(936, 162)
+position = Vector2(935, 162)
 
 [node name="Collectable16" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
 position = Vector2(12, 64)
 
 [node name="Collectable17" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
-position = Vector2(34, 64)
+position = Vector2(32, 65)
 
 [node name="Collectable18" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
-position = Vector2(53, 64)
+position = Vector2(52, 65)
 
 [node name="Collectable19" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
-position = Vector2(12, 49)
+position = Vector2(12, 44)
 
 [node name="Collectable20" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
-position = Vector2(31, 44)
+position = Vector2(32, 45)
 
 [node name="Collectable21" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
-position = Vector2(51, 46)
+position = Vector2(51, 45)
 
 [node name="Collectable22" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
 position = Vector2(298, 111)
 
 [node name="Collectable23" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
-position = Vector2(321, 111)
+position = Vector2(319, 111)
 
 [node name="Collectable24" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
-position = Vector2(343, 110)
+position = Vector2(340, 111)
 
 [node name="Collectable25" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
 position = Vector2(617, 134)
 
 [node name="Collectable26" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
-position = Vector2(639, 134)
+position = Vector2(638, 134)
 
 [node name="Collectable27" parent="SceneObjects/Collectables group" instance=ExtResource("4_10lpg")]
-position = Vector2(660, 134)
+position = Vector2(659, 134)
 
 [node name="Checkpoints group" type="Node" parent="SceneObjects"]
 
 [node name="Checkpoint" parent="SceneObjects/Checkpoints group" instance=ExtResource("7_kc2v0")]
 visible = false
 
-[node name="Checkpoint2" parent="SceneObjects/Checkpoints group" instance=ExtResource("7_kc2v0")]
-position = Vector2(388, 312)
-
 [node name="Checkpoint3" parent="SceneObjects/Checkpoints group" instance=ExtResource("7_kc2v0")]
-position = Vector2(794, 424)
+position = Vector2(785, 424)
 
 [node name="Checkpoint4" parent="SceneObjects/Checkpoints group" instance=ExtResource("7_kc2v0")]
-position = Vector2(91, 422)
+position = Vector2(101, 424)
 
 [node name="Checkpoint5" parent="SceneObjects/Checkpoints group" instance=ExtResource("7_kc2v0")]
-position = Vector2(1099, 423)
+position = Vector2(1100, 424)
 
 [node name="Checkpoint6" parent="SceneObjects/Checkpoints group" instance=ExtResource("7_kc2v0")]
 position = Vector2(1234, 39)
@@ -507,23 +505,20 @@ visible = false
 [node name="Spikes2" parent="SceneObjects/Spikes group" instance=ExtResource("13_r8kyd")]
 position = Vector2(697, 440)
 
-[node name="Spikes3" parent="SceneObjects/Spikes group" instance=ExtResource("13_r8kyd")]
-position = Vector2(1192, 202)
-
 [node name="Spikes4" parent="SceneObjects/Spikes group" instance=ExtResource("13_r8kyd")]
 position = Vector2(870, 273)
 
 [node name="Spikes5" parent="SceneObjects/Spikes group" instance=ExtResource("13_r8kyd")]
-position = Vector2(840, 273)
+position = Vector2(839, 273)
 
 [node name="Spikes6" parent="SceneObjects/Spikes group" instance=ExtResource("13_r8kyd")]
 position = Vector2(264, 440)
 
 [node name="Spikes7" parent="SceneObjects/Spikes group" instance=ExtResource("13_r8kyd")]
-position = Vector2(1049, 442)
+position = Vector2(1048, 440)
 
 [node name="Spikes8" parent="SceneObjects/Spikes group" instance=ExtResource("13_r8kyd")]
-position = Vector2(997, 197)
+position = Vector2(1000, 200)
 
 [node name="Spikes9" parent="SceneObjects/Spikes group" instance=ExtResource("13_r8kyd")]
 position = Vector2(122, 104)
@@ -541,9 +536,6 @@ position = Vector2(200, 442)
 
 [node name="Health group" type="Node" parent="SceneObjects"]
 
-[node name="HealthUp" parent="SceneObjects/Health group" instance=ExtResource("11_fmc86")]
-position = Vector2(226, 272)
-
 [node name="HealthUp2" parent="SceneObjects/Health group" instance=ExtResource("11_fmc86")]
 position = Vector2(513, 255)
 
@@ -551,10 +543,10 @@ position = Vector2(513, 255)
 position = Vector2(534, 255)
 
 [node name="HealthUp4" parent="SceneObjects/Health group" instance=ExtResource("11_fmc86")]
-position = Vector2(526, 235)
+position = Vector2(523, 236)
 
 [node name="Finish" parent="." instance=ExtResource("6_u1mx0")]
-position = Vector2(806, 592)
+position = Vector2(803, 592)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -689,7 +681,6 @@ offset_right = 15.0
 offset_bottom = 15.0
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-visible = false
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.5, 0)
@@ -727,13 +718,13 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(435, 440)
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource("9_grs0h")]
-position = Vector2(326, 103)
+position = Vector2(324, 104)
 
 [node name="Enemy3" parent="Enemies" instance=ExtResource("9_grs0h")]
 position = Vector2(745, 271)
 
 [node name="Enemy4" parent="Enemies" instance=ExtResource("9_grs0h")]
-position = Vector2(650, 128)
+position = Vector2(643, 128)
 
 [connection signal="pressed" from="UI/Pause/PausePanel/VBoxContainer/Resume" to="UI/Pause" method="_on_resume_pressed"]
 [connection signal="pressed" from="UI/Pause/PausePanel/VBoxContainer/Restart" to="UI/Pause" method="_on_restart_pressed"]
