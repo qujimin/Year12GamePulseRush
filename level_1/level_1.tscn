@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://svwq2klka5sn"]
+[gd_scene load_steps=28 format=3 uid="uid://svwq2klka5sn"]
 
 [ext_resource type="Texture2D" uid="uid://c4vo46ka6k25v" path="res://level_1/blue-preview.png" id="1_hbghi"]
 [ext_resource type="Texture2D" uid="uid://deabdqwoeyv84" path="res://level_1/Terrain (16x16).png" id="2_hn12h"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://djwblistbsi8e" path="res://level_1/game_manager.gd" id="5_3ockh"]
 [ext_resource type="PackedScene" uid="uid://chnkg84ucstqj" path="res://Interactibles/platform.tscn" id="6_bncxc"]
 [ext_resource type="PackedScene" uid="uid://bwmmjl6dp7auo" path="res://Interactibles/finish.tscn" id="6_u1mx0"]
+[ext_resource type="PackedScene" uid="uid://bx3qgbsktypj4" path="res://Interactibles/lr_platform.tscn" id="7_6diyo"]
 [ext_resource type="PackedScene" uid="uid://7msqwy8m3a74" path="res://Interactibles/checkpoint.tscn" id="7_kc2v0"]
 [ext_resource type="FontFile" uid="uid://dq5tf0bkavhnn" path="res://menu_scene/fonts/GrapeSoda.ttf" id="7_kwhby"]
 [ext_resource type="Script" uid="uid://v5m74ltmqb43" path="res://level_1/pause.gd" id="8_6qdp0"]
@@ -21,6 +22,7 @@
 [ext_resource type="Script" uid="uid://bkxmqcmjcj23r" path="res://health_ui.gd" id="14_c3k6u"]
 [ext_resource type="Texture2D" uid="uid://dkvde4tqirxpp" path="res://Interactibles/Items/Checkpoints/Checkpoint/PNG/basic/heart.png" id="15_28rm5"]
 [ext_resource type="Texture2D" uid="uid://myuf80i00qop" path="res://Interactibles/Items/Checkpoints/Checkpoint/PNG/basic/background.png" id="16_bncxc"]
+[ext_resource type="PackedScene" uid="uid://dw17iofuwto1d" path="res://control.tscn" id="23_gmj0w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ihfcg"]
 texture = ExtResource("2_hn12h")
@@ -358,14 +360,6 @@ offset_bottom = 480.0
 texture = ExtResource("1_hbghi")
 expand_mode = 1
 
-[node name="FallingSpikes group" type="Node" parent="SceneObjects"]
-
-[node name="FallingSpikes" parent="SceneObjects/FallingSpikes group" instance=ExtResource("8_qi5g4")]
-position = Vector2(735, 336)
-
-[node name="FallingSpikes2" parent="SceneObjects/FallingSpikes group" instance=ExtResource("8_qi5g4")]
-position = Vector2(839, 336)
-
 [node name="TileMap" type="TileMap" parent="SceneObjects"]
 texture_filter = 1
 scale = Vector2(1.5, 1.5)
@@ -396,6 +390,9 @@ drag_bottom_margin = 0.0
 
 [node name="Platform2" parent="SceneObjects/Platform group" instance=ExtResource("6_bncxc")]
 position = Vector2(258, 274)
+
+[node name="LRPlatform2" parent="SceneObjects/Platform group" instance=ExtResource("7_6diyo")]
+position = Vector2(252, 296)
 
 [node name="Collectables group" type="Node" parent="SceneObjects"]
 
@@ -525,6 +522,14 @@ position = Vector2(122, 104)
 
 [node name="Spikes10" parent="SceneObjects/Spikes group" instance=ExtResource("13_r8kyd")]
 position = Vector2(567, 274)
+
+[node name="FallingSpikes group" type="Node" parent="SceneObjects"]
+
+[node name="FallingSpikes" parent="SceneObjects/FallingSpikes group" instance=ExtResource("8_qi5g4")]
+position = Vector2(735, 336)
+
+[node name="FallingSpikes2" parent="SceneObjects/FallingSpikes group" instance=ExtResource("8_qi5g4")]
+position = Vector2(839, 336)
 
 [node name="Jumpad group" type="Node" parent="SceneObjects"]
 
@@ -680,7 +685,14 @@ layout_mode = 0
 offset_right = 15.0
 offset_bottom = 15.0
 
+[node name="Control" parent="UI" instance=ExtResource("23_gmj0w")]
+offset_left = 501.0
+offset_top = 27.0
+offset_right = 541.0
+offset_bottom = 67.0
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.5, 0)

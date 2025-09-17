@@ -190,6 +190,7 @@ var max_health: int:
 		return base_max_health + temporary_health_bonus
 var health = 0
 var can_take_damage = true
+var is_hit: bool = false  # New flag to track hit animation state
 
 func _ready():
 	health = max_health
@@ -256,6 +257,9 @@ func _updateData():
 		eightWayDash = true
 
 func _process(_delta):
+	if is_hit:
+		return  # Skip other animations while hit animation is playing
+	
 	# Directions
 	if is_on_wall() and !is_on_floor() and latch and wallLatching and ((wallLatchingModifer and latchHold) or !wallLatchingModifer):
 		latched = true
@@ -642,8 +646,12 @@ func _endGroundPound():
 
 func take_damage(damage_amount : int):
 	if can_take_damage:
-#		sprite.speed_scale = 1
-#		sprite.play("hit")
+		is_hit = true
+		var animated_sprite = get_node("PlayerSprite")
+		animated_sprite.speed_scale = 1
+		animated_sprite.play("hit")
+		await get_tree().create_timer(0.3).timeout
+		is_hit = false
 		iframes()
 		health -= damage_amount
 		PlayerManager.update_health_display()
