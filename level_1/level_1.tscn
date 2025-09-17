@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://svwq2klka5sn"]
+[gd_scene load_steps=26 format=3 uid="uid://svwq2klka5sn"]
 
 [ext_resource type="Texture2D" uid="uid://c4vo46ka6k25v" path="res://level_1/blue-preview.png" id="1_hbghi"]
 [ext_resource type="Texture2D" uid="uid://deabdqwoeyv84" path="res://level_1/Terrain (16x16).png" id="2_hn12h"]
@@ -20,8 +20,6 @@
 [ext_resource type="PackedScene" uid="uid://dxgcekits1osb" path="res://Interactibles/health_up.tscn" id="11_fmc86"]
 [ext_resource type="PackedScene" uid="uid://bpb3sh7bown3m" path="res://Interactibles/spikes.tscn" id="13_r8kyd"]
 [ext_resource type="Script" uid="uid://bkxmqcmjcj23r" path="res://health_ui.gd" id="14_c3k6u"]
-[ext_resource type="Texture2D" uid="uid://dkvde4tqirxpp" path="res://Interactibles/Items/Checkpoints/Checkpoint/PNG/basic/heart.png" id="15_28rm5"]
-[ext_resource type="Texture2D" uid="uid://myuf80i00qop" path="res://Interactibles/Items/Checkpoints/Checkpoint/PNG/basic/background.png" id="16_bncxc"]
 [ext_resource type="PackedScene" uid="uid://dw17iofuwto1d" path="res://control.tscn" id="23_gmj0w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ihfcg"]
@@ -676,8 +674,6 @@ anchor_right = 0.5
 grow_horizontal = 2
 scale = Vector2(2.5, 2.5)
 script = ExtResource("14_c3k6u")
-heart_texture = ExtResource("15_28rm5")
-empty_heart_texture = ExtResource("16_bncxc")
 
 [node name="HealthContainer" type="HBoxContainer" parent="UI/HealthUI"]
 texture_filter = 1
