@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dw17iofuwto1d"]
+
+[ext_resource type="Script" uid="uid://dbc6154nqiyqu" path="res://UI/control.gd" id="1_0fbet"]
+[ext_resource type="FontFile" uid="uid://dq5tf0bkavhnn" path="res://menu_scene/fonts/GrapeSoda.ttf" id="2_62e2m"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 19.0
+offset_top = 224.0
+offset_right = 59.0
+offset_bottom = 264.0
+script = ExtResource("1_0fbet")
+
+[node name="TimerLabel" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_62e2m")
+theme_override_font_sizes/font_size = 30

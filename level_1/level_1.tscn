@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://svwq2klka5sn"]
+[gd_scene load_steps=29 format=3 uid="uid://svwq2klka5sn"]
 
 [ext_resource type="Texture2D" uid="uid://c4vo46ka6k25v" path="res://level_1/blue-preview.png" id="1_hbghi"]
 [ext_resource type="Texture2D" uid="uid://deabdqwoeyv84" path="res://level_1/Terrain (16x16).png" id="2_hn12h"]
@@ -19,10 +19,11 @@
 [ext_resource type="Texture2D" uid="uid://beml5akwebor8" path="res://backgrounds/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 3/3.png" id="10_kc2v0"]
 [ext_resource type="PackedScene" uid="uid://dxgcekits1osb" path="res://Interactibles/health_up.tscn" id="11_fmc86"]
 [ext_resource type="PackedScene" uid="uid://bpb3sh7bown3m" path="res://Interactibles/spikes.tscn" id="13_r8kyd"]
-[ext_resource type="Script" uid="uid://bkxmqcmjcj23r" path="res://health_ui.gd" id="14_c3k6u"]
+[ext_resource type="Script" uid="uid://bkxmqcmjcj23r" path="res://UI/health_ui.gd" id="14_c3k6u"]
 [ext_resource type="Texture2D" uid="uid://dkvde4tqirxpp" path="res://Interactibles/Items/Checkpoints/Checkpoint/PNG/basic/heart.png" id="15_28rm5"]
 [ext_resource type="Texture2D" uid="uid://myuf80i00qop" path="res://Interactibles/Items/Checkpoints/Checkpoint/PNG/basic/background.png" id="16_bncxc"]
-[ext_resource type="PackedScene" uid="uid://dw17iofuwto1d" path="res://control.tscn" id="23_gmj0w"]
+[ext_resource type="PackedScene" uid="uid://devfkjb4epjqq" path="res://death_screen.tscn" id="20_bx1sm"]
+[ext_resource type="PackedScene" uid="uid://dw17iofuwto1d" path="res://UI/control.tscn" id="23_gmj0w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ihfcg"]
 texture = ExtResource("2_hn12h")
@@ -556,10 +557,10 @@ position = Vector2(803, 592)
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Panel" type="Panel" parent="UI"]
-offset_left = 7.0
-offset_top = 6.0
-offset_right = 105.0
-offset_bottom = 46.0
+offset_left = 10.0
+offset_top = 2.0
+offset_right = 108.0
+offset_bottom = 42.0
 
 [node name="PointsLabel" type="Label" parent="UI/Panel"]
 unique_name_in_owner = true
@@ -568,6 +569,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -8.0
+offset_right = 13.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -679,17 +682,49 @@ script = ExtResource("14_c3k6u")
 heart_texture = ExtResource("15_28rm5")
 empty_heart_texture = ExtResource("16_bncxc")
 
+[node name="Panel" type="Panel" parent="UI/HealthUI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -51.0
+offset_right = 51.0
+offset_bottom = 28.0
+grow_horizontal = 2
+
 [node name="HealthContainer" type="HBoxContainer" parent="UI/HealthUI"]
 texture_filter = 1
-layout_mode = 0
-offset_right = 15.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -7.5
+offset_right = 7.5
 offset_bottom = 15.0
+grow_horizontal = 2
+
+[node name="Panel2" type="Panel" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -108.0
+offset_top = 2.0
+offset_right = -10.0
+offset_bottom = 42.0
+grow_horizontal = 0
 
 [node name="Control" parent="UI" instance=ExtResource("23_gmj0w")]
-offset_left = 501.0
-offset_top = 27.0
-offset_right = 541.0
-offset_bottom = 67.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -87.0
+offset_top = 6.0
+offset_right = -47.0
+offset_bottom = 46.0
+grow_horizontal = 0
+
+[node name="Death_Screen" parent="UI" instance=ExtResource("20_bx1sm")]
+visible = false
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 visible = false

@@ -3,57 +3,44 @@ extends Control
 # Timer settings - adjust these values
 @export var countdown_time: float = 60.0  # Time in seconds
 @export var show_minutes: bool = true     # Show MM:SS format or just seconds
-@export var font_size: int = 48           # Text size
-@export var timer_color: Color = Color.WHITE  # Text color
 
 # Internal variables
 var time_remaining: float
 var is_running: bool = false
-var timer_label: Label
+@onready var timer_label: Label = $TimerLabel  # Reference to Label node in the scene
 
 func _ready():
-	# Create the label for displaying the countdown
-	timer_label = Label.new()
-	add_child(timer_label)
-	
-	# Set up label properties
-	timer_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	timer_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	timer_label.anchors_preset = Control.PRESET_FULL_RECT
-	
-	# Apply formatting
-	apply_formatting()
+	# Ensure the Label node exists
+	if timer_label == null:
+		push_error("TimerLabel node not found! Please add a Label node named 'TimerLabel' as a child of this Control.")
+		return
 	
 	# Initialize the timer
 	reset_timer()
 	update_display()
-
-func apply_formatting():
-	# Create theme override for font size and color
-	timer_label.add_theme_font_size_override("font_size", font_size)
-	timer_label.add_theme_color_override("font_color", timer_color)
+	start_timer()  # Start the timer automatically for testing
+	print("Timer initialized with ", countdown_time, " seconds")
 
 func _process(delta):
 	if is_running and time_remaining > 0:
 		time_remaining -= delta
 		update_display()
-		
-		# Check if timer finished
+		print("Time remaining: ", time_remaining)  # Debug
 		if time_remaining <= 0:
 			time_remaining = 0
 			is_running = false
 			timer_finished()
+	else:
+		print("Process running, but timer not active. is_running: ", is_running, " time_remaining: ", time_remaining)
 
 func update_display():
 	var display_text: String
-	
 	if show_minutes:
 		var minutes = int(time_remaining) / 60
 		var seconds = int(time_remaining) % 60
 		display_text = "%02d:%02d" % [minutes, seconds]
 	else:
 		display_text = "%.0f" % time_remaining
-	
 	timer_label.text = display_text
 
 func start_timer():
@@ -77,14 +64,10 @@ func add_time(seconds: float):
 	update_display()
 
 func timer_finished():
-	print("Timer finished!")
-	# Add your custom logic here for when timer reaches zero
-	# Examples:
-	# get_tree().change_scene_to_file("res://game_over.tscn")
-	# player.take_damage(100)
-	# spawn_enemy()
+	print("Timer finished! Time remaining: ", time_remaining)
+	# Switch to Death_Screen scene
+	get_tree().change_scene_to_file("res://Death_Screen.tscn")
 
-# Public functions you can call from other scripts:
 func get_time_remaining() -> float:
 	return time_remaining
 

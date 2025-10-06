@@ -9,9 +9,9 @@ func _ready() -> void:
 	# Explicitly disable looping for jump animation
 	if animated_sprite_2d.sprite_frames:
 		animated_sprite_2d.sprite_frames.set_animation_loop("jump", false)
-	body_entered.connect(_on_body_entered)
+
 	body_exited.connect(_on_body_exited)
-	animated_sprite_2d.animation_finished.connect(_on_animated_sprite_2d_animation_finished)
+
 
 func _on_body_entered(body: Node2D) -> void:
 	if has_triggered:
