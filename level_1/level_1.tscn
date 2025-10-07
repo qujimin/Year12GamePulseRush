@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://svwq2klka5sn"]
+[gd_scene load_steps=30 format=3 uid="uid://svwq2klka5sn"]
 
 [ext_resource type="Texture2D" uid="uid://c4vo46ka6k25v" path="res://level_1/blue-preview.png" id="1_hbghi"]
 [ext_resource type="Texture2D" uid="uid://deabdqwoeyv84" path="res://level_1/Terrain (16x16).png" id="2_hn12h"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://dkvde4tqirxpp" path="res://Interactibles/Items/Checkpoints/Checkpoint/PNG/basic/heart.png" id="15_28rm5"]
 [ext_resource type="Texture2D" uid="uid://myuf80i00qop" path="res://Interactibles/Items/Checkpoints/Checkpoint/PNG/basic/background.png" id="16_bncxc"]
 [ext_resource type="PackedScene" uid="uid://devfkjb4epjqq" path="res://death_screen.tscn" id="20_bx1sm"]
+[ext_resource type="PackedScene" uid="uid://bdfb35bbo1g3s" path="res://win_screen.tscn" id="21_01unt"]
 [ext_resource type="PackedScene" uid="uid://dw17iofuwto1d" path="res://UI/control.tscn" id="23_gmj0w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ihfcg"]
@@ -725,6 +726,8 @@ grow_horizontal = 0
 
 [node name="Death_Screen" parent="UI" instance=ExtResource("20_bx1sm")]
 visible = false
+
+[node name="Win_Screen" parent="UI" instance=ExtResource("21_01unt")]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 visible = false
