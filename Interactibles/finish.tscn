@@ -1,12 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwmmjl6dp7auo"]
+[gd_scene load_steps=4 format=3 uid="uid://bwmmjl6dp7auo"]
 
 [ext_resource type="Texture2D" uid="uid://bg85alt8xbqf" path="res://Interactibles/Items/Checkpoints/End/End (Idle).png" id="1_1l4lb"]
+[ext_resource type="Script" uid="uid://cwxn3xm34dhom" path="res://Interactibles/finish.gd" id="1_ksrem"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a6ykx"]
 size = Vector2(46, 44)
 
 [node name="Finish" type="Area2D"]
 texture_filter = 1
+script = ExtResource("1_ksrem")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_1l4lb")
@@ -14,3 +16,5 @@ texture = ExtResource("1_1l4lb")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_a6ykx")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

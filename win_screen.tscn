@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdfb35bbo1g3s"]
+[gd_scene load_steps=5 format=3 uid="uid://bdfb35bbo1g3s"]
 
 [ext_resource type="Script" uid="uid://dmny35xjwh53m" path="res://win_screen.gd" id="1_l5t5q"]
 [ext_resource type="Texture2D" uid="uid://db7fwmbk0jd78" path="res://menu_scene/pfp.jpg" id="1_wmwda"]
@@ -6,31 +6,6 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1txte"]
 texture = ExtResource("1_wmwda")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_26557"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(1, 1, 1, 1)
-corner_detail = 20
-shadow_size = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_luvg0"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-corner_detail = 20
-shadow_size = 5
-shadow_offset = Vector2(0, 3.4)
 
 [node name="Win_Screen" type="Control"]
 layout_mode = 3
@@ -46,6 +21,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 14.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_1txte")
@@ -82,15 +58,22 @@ offset_bottom = -5.0
 grow_vertical = 0
 theme_override_constants/separation = 7
 
-[node name="Main Menu" type="Button" parent="VBoxContainer"]
-process_mode = 3
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_colors/font_hover_color = Color(1, 0.956863, 0.309804, 1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+[node name="TimeLabel" type="Label" parent="."]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_l5t5q")
-theme_override_font_sizes/font_size = 50
-theme_override_styles/hover = SubResource("StyleBoxFlat_26557")
-theme_override_styles/normal = SubResource("StyleBoxFlat_luvg0")
-text = "Back"
+theme_override_font_sizes/font_size = 30
+
+[node name="PointsLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_l5t5q")
+theme_override_font_sizes/font_size = 30

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dbc6154nqiyqu" path="res://UI/control.gd" id="1_0fbet"]
 [ext_resource type="FontFile" uid="uid://dq5tf0bkavhnn" path="res://menu_scene/fonts/GrapeSoda.ttf" id="2_62e2m"]
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" groups=["timer"]]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 19.0

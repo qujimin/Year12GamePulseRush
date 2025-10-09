@@ -553,7 +553,7 @@ position = Vector2(534, 255)
 position = Vector2(523, 236)
 
 [node name="Finish" parent="." instance=ExtResource("6_u1mx0")]
-position = Vector2(803, 592)
+position = Vector2(607, 423)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -727,7 +727,9 @@ grow_horizontal = 0
 [node name="Death_Screen" parent="UI" instance=ExtResource("20_bx1sm")]
 visible = false
 
-[node name="Win_Screen" parent="UI" instance=ExtResource("21_01unt")]
+[node name="WinScreen" parent="UI" instance=ExtResource("21_01unt")]
+unique_name_in_owner = true
+visible = false
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 visible = false
